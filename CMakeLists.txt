@@ -21,8 +21,8 @@ set(protobuf_v2_PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/protobuf/v2)
 ExternalProject_Add(
     protobuf_v2
     PREFIX ${protobuf_v2_PREFIX}
-    URL "https://github.com/google/protobuf/releases/download/v2.6.0/protobuf-2.6.0.tar.bz2"
-    URL_MD5 "78253c509a055dab316a21e754cb278a"
+    URL "https://github.com/google/protobuf/releases/download/v2.6.1/protobuf-2.6.1.tar.bz2"
+    URL_MD5 "11aaac2d704eef8efd1867a807865d85"
     CONFIGURE_COMMAND CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_C_COMPILER} ${protobuf_v2_PREFIX}/src/protobuf_v2/configure --prefix=${protobuf_v2_PREFIX} --enable-shared=no
     BUILD_COMMAND $(MAKE)
     INSTALL_COMMAND $(MAKE) install
