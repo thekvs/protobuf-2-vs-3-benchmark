@@ -118,6 +118,18 @@ class Record : public ::google::protobuf::Message {
   inline const ::google::protobuf::RepeatedPtrField< ::std::string>& strings() const;
   inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_strings();
 
+  // repeated int32 small_ids = 3;
+  inline int small_ids_size() const;
+  inline void clear_small_ids();
+  static const int kSmallIdsFieldNumber = 3;
+  inline ::google::protobuf::int32 small_ids(int index) const;
+  inline void set_small_ids(int index, ::google::protobuf::int32 value);
+  inline void add_small_ids(::google::protobuf::int32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      small_ids() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_small_ids();
+
   // @@protoc_insertion_point(class_scope:protobuf_v2_benchmark.Record)
  private:
 
@@ -127,6 +139,7 @@ class Record : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int64 > ids_;
   ::google::protobuf::RepeatedPtrField< ::std::string> strings_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > small_ids_;
   friend void  protobuf_AddDesc_message_2fv2_2fmessage_2eproto();
   friend void protobuf_AssignDesc_message_2fv2_2fmessage_2eproto();
   friend void protobuf_ShutdownFile_message_2fv2_2fmessage_2eproto();
@@ -223,6 +236,36 @@ inline ::google::protobuf::RepeatedPtrField< ::std::string>*
 Record::mutable_strings() {
   // @@protoc_insertion_point(field_mutable_list:protobuf_v2_benchmark.Record.strings)
   return &strings_;
+}
+
+// repeated int32 small_ids = 3;
+inline int Record::small_ids_size() const {
+  return small_ids_.size();
+}
+inline void Record::clear_small_ids() {
+  small_ids_.Clear();
+}
+inline ::google::protobuf::int32 Record::small_ids(int index) const {
+  // @@protoc_insertion_point(field_get:protobuf_v2_benchmark.Record.small_ids)
+  return small_ids_.Get(index);
+}
+inline void Record::set_small_ids(int index, ::google::protobuf::int32 value) {
+  small_ids_.Set(index, value);
+  // @@protoc_insertion_point(field_set:protobuf_v2_benchmark.Record.small_ids)
+}
+inline void Record::add_small_ids(::google::protobuf::int32 value) {
+  small_ids_.Add(value);
+  // @@protoc_insertion_point(field_add:protobuf_v2_benchmark.Record.small_ids)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+Record::small_ids() const {
+  // @@protoc_insertion_point(field_list:protobuf_v2_benchmark.Record.small_ids)
+  return small_ids_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+Record::mutable_small_ids() {
+  // @@protoc_insertion_point(field_mutable_list:protobuf_v2_benchmark.Record.small_ids)
+  return &small_ids_;
 }
 
 

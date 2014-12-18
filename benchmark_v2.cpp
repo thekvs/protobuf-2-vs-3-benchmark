@@ -27,6 +27,10 @@ protobuf_serialization_test(size_t iterations)
         r1.add_strings(kStringValue);
     }
 
+    for (size_t i = 0; i < kSmallIntegers.size(); i++) {
+        r1.add_small_ids(kSmallIntegers[i]);
+    }
+
     std::string serialized;
 
     r1.SerializeToString(&serialized);
