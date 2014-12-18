@@ -34,10 +34,11 @@ void protobuf_AssignDesc_message_2fv2_2fmessage_2eproto() {
       "message/v2/message.proto");
   GOOGLE_CHECK(file != NULL);
   Record_descriptor_ = file->message_type(0);
-  static const int Record_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, ids_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, strings_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, small_ids_),
+  static const int Record_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, i_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, s_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, small_i_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, d1_),
   };
   Record_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -81,8 +82,8 @@ void protobuf_AddDesc_message_2fv2_2fmessage_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\030message/v2/message.proto\022\025protobuf_v2_"
-    "benchmark\"9\n\006Record\022\013\n\003ids\030\001 \003(\003\022\017\n\007stri"
-    "ngs\030\002 \003(\t\022\021\n\tsmall_ids\030\003 \003(\005", 108);
+    "benchmark\";\n\006Record\022\t\n\001i\030\001 \003(\003\022\t\n\001s\030\002 \003("
+    "\t\022\017\n\007small_i\030\003 \003(\005\022\n\n\002d1\030\004 \003(\001", 110);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "message/v2/message.proto", &protobuf_RegisterTypes);
   Record::default_instance_ = new Record();
@@ -100,9 +101,10 @@ struct StaticDescriptorInitializer_message_2fv2_2fmessage_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int Record::kIdsFieldNumber;
-const int Record::kStringsFieldNumber;
-const int Record::kSmallIdsFieldNumber;
+const int Record::kIFieldNumber;
+const int Record::kSFieldNumber;
+const int Record::kSmallIFieldNumber;
+const int Record::kD1FieldNumber;
 #endif  // !_MSC_VER
 
 Record::Record()
@@ -159,9 +161,10 @@ Record* Record::New() const {
 }
 
 void Record::Clear() {
-  ids_.Clear();
-  strings_.Clear();
-  small_ids_.Clear();
+  i_.Clear();
+  s_.Clear();
+  small_i_.Clear();
+  d1_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -176,59 +179,78 @@ bool Record::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated int64 ids = 1;
+      // repeated int64 i = 1;
       case 1: {
         if (tag == 8) {
-         parse_ids:
+         parse_i:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 1, 8, input, this->mutable_ids())));
+                 1, 8, input, this->mutable_i())));
         } else if (tag == 10) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, this->mutable_ids())));
+                 input, this->mutable_i())));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(8)) goto parse_ids;
-        if (input->ExpectTag(18)) goto parse_strings;
+        if (input->ExpectTag(8)) goto parse_i;
+        if (input->ExpectTag(18)) goto parse_s;
         break;
       }
 
-      // repeated string strings = 2;
+      // repeated string s = 2;
       case 2: {
         if (tag == 18) {
-         parse_strings:
+         parse_s:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->add_strings()));
+                input, this->add_s()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->strings(this->strings_size() - 1).data(),
-            this->strings(this->strings_size() - 1).length(),
+            this->s(this->s_size() - 1).data(),
+            this->s(this->s_size() - 1).length(),
             ::google::protobuf::internal::WireFormat::PARSE,
-            "strings");
+            "s");
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_strings;
-        if (input->ExpectTag(24)) goto parse_small_ids;
+        if (input->ExpectTag(18)) goto parse_s;
+        if (input->ExpectTag(24)) goto parse_small_i;
         break;
       }
 
-      // repeated int32 small_ids = 3;
+      // repeated int32 small_i = 3;
       case 3: {
         if (tag == 24) {
-         parse_small_ids:
+         parse_small_i:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 1, 24, input, this->mutable_small_ids())));
+                 1, 24, input, this->mutable_small_i())));
         } else if (tag == 26) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, this->mutable_small_ids())));
+                 input, this->mutable_small_i())));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_small_ids;
+        if (input->ExpectTag(24)) goto parse_small_i;
+        if (input->ExpectTag(33)) goto parse_d1;
+        break;
+      }
+
+      // repeated double d1 = 4;
+      case 4: {
+        if (tag == 33) {
+         parse_d1:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 1, 33, input, this->mutable_d1())));
+        } else if (tag == 34) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, this->mutable_d1())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(33)) goto parse_d1;
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -258,26 +280,32 @@ failure:
 void Record::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:protobuf_v2_benchmark.Record)
-  // repeated int64 ids = 1;
-  for (int i = 0; i < this->ids_size(); i++) {
+  // repeated int64 i = 1;
+  for (int i = 0; i < this->i_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(
-      1, this->ids(i), output);
+      1, this->i(i), output);
   }
 
-  // repeated string strings = 2;
-  for (int i = 0; i < this->strings_size(); i++) {
+  // repeated string s = 2;
+  for (int i = 0; i < this->s_size(); i++) {
   ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-    this->strings(i).data(), this->strings(i).length(),
+    this->s(i).data(), this->s(i).length(),
     ::google::protobuf::internal::WireFormat::SERIALIZE,
-    "strings");
+    "s");
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->strings(i), output);
+      2, this->s(i), output);
   }
 
-  // repeated int32 small_ids = 3;
-  for (int i = 0; i < this->small_ids_size(); i++) {
+  // repeated int32 small_i = 3;
+  for (int i = 0; i < this->small_i_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(
-      3, this->small_ids(i), output);
+      3, this->small_i(i), output);
+  }
+
+  // repeated double d1 = 4;
+  for (int i = 0; i < this->d1_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(
+      4, this->d1(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -290,26 +318,32 @@ void Record::SerializeWithCachedSizes(
 ::google::protobuf::uint8* Record::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:protobuf_v2_benchmark.Record)
-  // repeated int64 ids = 1;
-  for (int i = 0; i < this->ids_size(); i++) {
+  // repeated int64 i = 1;
+  for (int i = 0; i < this->i_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt64ToArray(1, this->ids(i), target);
+      WriteInt64ToArray(1, this->i(i), target);
   }
 
-  // repeated string strings = 2;
-  for (int i = 0; i < this->strings_size(); i++) {
+  // repeated string s = 2;
+  for (int i = 0; i < this->s_size(); i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->strings(i).data(), this->strings(i).length(),
+      this->s(i).data(), this->s(i).length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "strings");
+      "s");
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(2, this->strings(i), target);
+      WriteStringToArray(2, this->s(i), target);
   }
 
-  // repeated int32 small_ids = 3;
-  for (int i = 0; i < this->small_ids_size(); i++) {
+  // repeated int32 small_i = 3;
+  for (int i = 0; i < this->small_i_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt32ToArray(3, this->small_ids(i), target);
+      WriteInt32ToArray(3, this->small_i(i), target);
+  }
+
+  // repeated double d1 = 4;
+  for (int i = 0; i < this->d1_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteDoubleToArray(4, this->d1(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -323,31 +357,38 @@ void Record::SerializeWithCachedSizes(
 int Record::ByteSize() const {
   int total_size = 0;
 
-  // repeated int64 ids = 1;
+  // repeated int64 i = 1;
   {
     int data_size = 0;
-    for (int i = 0; i < this->ids_size(); i++) {
+    for (int i = 0; i < this->i_size(); i++) {
       data_size += ::google::protobuf::internal::WireFormatLite::
-        Int64Size(this->ids(i));
+        Int64Size(this->i(i));
     }
-    total_size += 1 * this->ids_size() + data_size;
+    total_size += 1 * this->i_size() + data_size;
   }
 
-  // repeated string strings = 2;
-  total_size += 1 * this->strings_size();
-  for (int i = 0; i < this->strings_size(); i++) {
+  // repeated string s = 2;
+  total_size += 1 * this->s_size();
+  for (int i = 0; i < this->s_size(); i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
-      this->strings(i));
+      this->s(i));
   }
 
-  // repeated int32 small_ids = 3;
+  // repeated int32 small_i = 3;
   {
     int data_size = 0;
-    for (int i = 0; i < this->small_ids_size(); i++) {
+    for (int i = 0; i < this->small_i_size(); i++) {
       data_size += ::google::protobuf::internal::WireFormatLite::
-        Int32Size(this->small_ids(i));
+        Int32Size(this->small_i(i));
     }
-    total_size += 1 * this->small_ids_size() + data_size;
+    total_size += 1 * this->small_i_size() + data_size;
+  }
+
+  // repeated double d1 = 4;
+  {
+    int data_size = 0;
+    data_size = 8 * this->d1_size();
+    total_size += 1 * this->d1_size() + data_size;
   }
 
   if (!unknown_fields().empty()) {
@@ -375,9 +416,10 @@ void Record::MergeFrom(const ::google::protobuf::Message& from) {
 
 void Record::MergeFrom(const Record& from) {
   GOOGLE_CHECK_NE(&from, this);
-  ids_.MergeFrom(from.ids_);
-  strings_.MergeFrom(from.strings_);
-  small_ids_.MergeFrom(from.small_ids_);
+  i_.MergeFrom(from.i_);
+  s_.MergeFrom(from.s_);
+  small_i_.MergeFrom(from.small_i_);
+  d1_.MergeFrom(from.d1_);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -400,9 +442,10 @@ bool Record::IsInitialized() const {
 
 void Record::Swap(Record* other) {
   if (other != this) {
-    ids_.Swap(&other->ids_);
-    strings_.Swap(&other->strings_);
-    small_ids_.Swap(&other->small_ids_);
+    i_.Swap(&other->i_);
+    s_.Swap(&other->s_);
+    small_i_.Swap(&other->small_i_);
+    d1_.Swap(&other->d1_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

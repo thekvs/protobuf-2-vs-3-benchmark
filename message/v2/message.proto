@@ -1,7 +1,8 @@
 package protobuf_v2_benchmark;
 
 message Record {
-    repeated int64 ids = 1;
-    repeated string strings = 2;
-    repeated int32 small_ids = 3;
+    repeated int64 i = 1;
+    repeated string s = 2;
+    repeated int32 small_i = 3;
+    repeated double d1 = 4;
 }

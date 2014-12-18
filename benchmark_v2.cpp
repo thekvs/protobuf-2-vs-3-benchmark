@@ -20,15 +20,19 @@ protobuf_serialization_test(size_t iterations)
     Record r1;
 
     for (size_t i = 0; i < kIntegers.size(); i++) {
-        r1.add_ids(kIntegers[i]);
+        r1.add_i(kIntegers[i]);
     }
 
     for (size_t i = 0; i < kStringsCount; i++) {
-        r1.add_strings(kStringValue);
+        r1.add_s(kStringValue);
     }
 
     for (size_t i = 0; i < kSmallIntegers.size(); i++) {
-        r1.add_small_ids(kSmallIntegers[i]);
+        r1.add_small_i(kSmallIntegers[i]);
+    }
+
+    for (size_t i = 0; i < kDoubles1.size(); i++) {
+        r1.add_d1(kDoubles1[i]);
     }
 
     std::string serialized;
