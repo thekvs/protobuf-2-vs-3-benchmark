@@ -12,32 +12,38 @@
 #include "generated/message/v3/message.pb.h"
 #include "data.hpp"
 
+using namespace protobuf_v3_benchmark;
+
 void
-protobuf_serialization_test(size_t iterations)
+init_message(Record* r)
 {
-    using namespace protobuf_v3_benchmark;
-
-    Record r1;
-
     for (size_t i = 0; i < kIntegers.size(); i++) {
-        r1.add_i(kIntegers[i]);
+        r->add_i(kIntegers[i]);
     }
 
     for (size_t i = 0; i < kStringsCount; i++) {
-        r1.add_s(kStringValue);
+        r->add_s(kStringValue);
     }
 
     for (size_t i = 0; i < kSmallIntegers.size(); i++) {
-        r1.add_small_i(kSmallIntegers[i]);
+        r->add_small_i(kSmallIntegers[i]);
     }
 
     for (size_t i = 0; i < kDoubles1.size(); i++) {
-        r1.add_d1(kDoubles1[i]);
+        r->add_d1(kDoubles1[i]);
     }
 
     for (size_t i = 0; i < kDoubles2.size(); i++) {
-        r1.add_d2(kDoubles2[i]);
+        r->add_d2(kDoubles2[i]);
     }
+}
+
+void
+protobuf_serialization_test(size_t iterations)
+{
+    Record r1;
+
+    init_message(&r1);
 
     std::string serialized;
 
