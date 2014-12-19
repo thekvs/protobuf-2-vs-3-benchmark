@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package protobuf_v3_benchmark;
+option cc_enable_arenas = true;
+
+message Record {
+    repeated int64 i = 1;
+    repeated string s = 2;
+    repeated int32 small_i = 3;
+    repeated double d1 = 4;
+    repeated double d2 = 5;
+}
