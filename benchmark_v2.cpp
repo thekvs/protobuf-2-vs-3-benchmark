@@ -35,6 +35,10 @@ protobuf_serialization_test(size_t iterations)
         r1.add_d1(kDoubles1[i]);
     }
 
+    for (size_t i = 0; i < kDoubles2.size(); i++) {
+        r1.add_d2(kDoubles2[i]);
+    }
+
     std::string serialized;
 
     r1.SerializeToString(&serialized);

@@ -5,4 +5,5 @@ message Record {
     repeated string s = 2;
     repeated int32 small_i = 3;
     repeated double d1 = 4;
+    repeated double d2 = 5;
 }

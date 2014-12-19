@@ -142,6 +142,18 @@ class Record : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< double >*
       mutable_d1();
 
+  // repeated double d2 = 5;
+  inline int d2_size() const;
+  inline void clear_d2();
+  static const int kD2FieldNumber = 5;
+  inline double d2(int index) const;
+  inline void set_d2(int index, double value);
+  inline void add_d2(double value);
+  inline const ::google::protobuf::RepeatedField< double >&
+      d2() const;
+  inline ::google::protobuf::RepeatedField< double >*
+      mutable_d2();
+
   // @@protoc_insertion_point(class_scope:protobuf_v2_benchmark.Record)
  private:
 
@@ -153,6 +165,7 @@ class Record : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::std::string> s_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > small_i_;
   ::google::protobuf::RepeatedField< double > d1_;
+  ::google::protobuf::RepeatedField< double > d2_;
   friend void  protobuf_AddDesc_message_2fv2_2fmessage_2eproto();
   friend void protobuf_AssignDesc_message_2fv2_2fmessage_2eproto();
   friend void protobuf_ShutdownFile_message_2fv2_2fmessage_2eproto();
@@ -309,6 +322,36 @@ inline ::google::protobuf::RepeatedField< double >*
 Record::mutable_d1() {
   // @@protoc_insertion_point(field_mutable_list:protobuf_v2_benchmark.Record.d1)
   return &d1_;
+}
+
+// repeated double d2 = 5;
+inline int Record::d2_size() const {
+  return d2_.size();
+}
+inline void Record::clear_d2() {
+  d2_.Clear();
+}
+inline double Record::d2(int index) const {
+  // @@protoc_insertion_point(field_get:protobuf_v2_benchmark.Record.d2)
+  return d2_.Get(index);
+}
+inline void Record::set_d2(int index, double value) {
+  d2_.Set(index, value);
+  // @@protoc_insertion_point(field_set:protobuf_v2_benchmark.Record.d2)
+}
+inline void Record::add_d2(double value) {
+  d2_.Add(value);
+  // @@protoc_insertion_point(field_add:protobuf_v2_benchmark.Record.d2)
+}
+inline const ::google::protobuf::RepeatedField< double >&
+Record::d2() const {
+  // @@protoc_insertion_point(field_list:protobuf_v2_benchmark.Record.d2)
+  return d2_;
+}
+inline ::google::protobuf::RepeatedField< double >*
+Record::mutable_d2() {
+  // @@protoc_insertion_point(field_mutable_list:protobuf_v2_benchmark.Record.d2)
+  return &d2_;
 }
 
 

@@ -34,11 +34,12 @@ void protobuf_AssignDesc_message_2fv2_2fmessage_2eproto() {
       "message/v2/message.proto");
   GOOGLE_CHECK(file != NULL);
   Record_descriptor_ = file->message_type(0);
-  static const int Record_offsets_[4] = {
+  static const int Record_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, i_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, s_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, small_i_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, d1_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Record, d2_),
   };
   Record_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -82,8 +83,9 @@ void protobuf_AddDesc_message_2fv2_2fmessage_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\030message/v2/message.proto\022\025protobuf_v2_"
-    "benchmark\";\n\006Record\022\t\n\001i\030\001 \003(\003\022\t\n\001s\030\002 \003("
-    "\t\022\017\n\007small_i\030\003 \003(\005\022\n\n\002d1\030\004 \003(\001", 110);
+    "benchmark\"G\n\006Record\022\t\n\001i\030\001 \003(\003\022\t\n\001s\030\002 \003("
+    "\t\022\017\n\007small_i\030\003 \003(\005\022\n\n\002d1\030\004 \003(\001\022\n\n\002d2\030\005 \003"
+    "(\001", 122);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "message/v2/message.proto", &protobuf_RegisterTypes);
   Record::default_instance_ = new Record();
@@ -105,6 +107,7 @@ const int Record::kIFieldNumber;
 const int Record::kSFieldNumber;
 const int Record::kSmallIFieldNumber;
 const int Record::kD1FieldNumber;
+const int Record::kD2FieldNumber;
 #endif  // !_MSC_VER
 
 Record::Record()
@@ -165,6 +168,7 @@ void Record::Clear() {
   s_.Clear();
   small_i_.Clear();
   d1_.Clear();
+  d2_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -251,6 +255,25 @@ bool Record::MergePartialFromCodedStream(
           goto handle_unusual;
         }
         if (input->ExpectTag(33)) goto parse_d1;
+        if (input->ExpectTag(41)) goto parse_d2;
+        break;
+      }
+
+      // repeated double d2 = 5;
+      case 5: {
+        if (tag == 41) {
+         parse_d2:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 1, 41, input, this->mutable_d2())));
+        } else if (tag == 42) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, this->mutable_d2())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(41)) goto parse_d2;
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -308,6 +331,12 @@ void Record::SerializeWithCachedSizes(
       4, this->d1(i), output);
   }
 
+  // repeated double d2 = 5;
+  for (int i = 0; i < this->d2_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(
+      5, this->d2(i), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -344,6 +373,12 @@ void Record::SerializeWithCachedSizes(
   for (int i = 0; i < this->d1_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteDoubleToArray(4, this->d1(i), target);
+  }
+
+  // repeated double d2 = 5;
+  for (int i = 0; i < this->d2_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteDoubleToArray(5, this->d2(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -391,6 +426,13 @@ int Record::ByteSize() const {
     total_size += 1 * this->d1_size() + data_size;
   }
 
+  // repeated double d2 = 5;
+  {
+    int data_size = 0;
+    data_size = 8 * this->d2_size();
+    total_size += 1 * this->d2_size() + data_size;
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -420,6 +462,7 @@ void Record::MergeFrom(const Record& from) {
   s_.MergeFrom(from.s_);
   small_i_.MergeFrom(from.small_i_);
   d1_.MergeFrom(from.d1_);
+  d2_.MergeFrom(from.d2_);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -446,6 +489,7 @@ void Record::Swap(Record* other) {
     s_.Swap(&other->s_);
     small_i_.Swap(&other->small_i_);
     d1_.Swap(&other->d1_);
+    d2_.Swap(&other->d2_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
