@@ -27,6 +27,12 @@ ExternalProject_Add(
     BUILD_COMMAND $(MAKE)
     INSTALL_COMMAND $(MAKE) install
     BUILD_IN_SOURCE 1
+    LOG_DOWNLOAD 1
+    LOG_UPDATE 1
+    # LOG_CONFIGURE 1
+    LOG_BUILD 1
+    LOG_TEST 1
+    LOG_INSTALL 1
 )
 set(PROTOBUF_V2_LIBRARIES ${protobuf_v2_PREFIX}/lib/libprotobuf.a)
 set(PROTOBUF_V2_GENERATOR ${protobuf_v2_PREFIX}/bin/protoc)
@@ -40,6 +46,12 @@ ExternalProject_Add(
     BUILD_COMMAND $(MAKE)
     INSTALL_COMMAND $(MAKE) install
     BUILD_IN_SOURCE 1
+    LOG_DOWNLOAD 1
+    LOG_UPDATE 1
+    #LOG_CONFIGURE 1
+    LOG_BUILD 1
+    LOG_TEST 1
+    LOG_INSTALL 1
 )
 set(PROTOBUF_V3_LIBRARIES ${protobuf_v3_PREFIX}/lib/libprotobuf.a)
 set(PROTOBUF_V3_GENERATOR ${protobuf_v3_PREFIX}/bin/protoc)
