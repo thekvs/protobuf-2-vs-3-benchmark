@@ -28,7 +28,7 @@ ExternalProject_Add(
     INSTALL_COMMAND $(MAKE) install
     BUILD_IN_SOURCE 1
 )
-include_directories(${protobuf_v2_PREFIX}/include)
+include_directories(SYSTEM ${protobuf_v2_PREFIX}/include)
 set(PROTOBUF_V2_LIBRARIES ${protobuf_v2_PREFIX}/lib/libprotobuf.a)
 set(PROTOBUF_V2_GENERATOR ${protobuf_v2_PREFIX}/bin/protoc)
 
