@@ -2,7 +2,7 @@
 #define __DATA_HPP_INCLUDED__
 
 #include <vector>
-#include <stdint.h>
+#include <cstdint>
 
 const size_t      kStringsCount = 100;
 const std::string kStringValue  = "shgfkghsdfjhgsfjhfgjhfgjsffghgsfdhgsfdfkdjhfioukjhkfdljgdfkgvjafdhasgdfwurtjkghfsdjkfg";
