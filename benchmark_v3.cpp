@@ -11,65 +11,9 @@
 
 #include "generated/message/v3/message.pb.h"
 #include "data.hpp"
+#include "common.hpp"
 
 using namespace protobuf_v3_benchmark;
-
-void
-init_message(Record* r)
-{
-    for (size_t i = 0; i < kIntegers.size(); i++) {
-        r->add_i(kIntegers[i]);
-    }
-
-    for (size_t i = 0; i < kStringsCount; i++) {
-        r->add_s(kStringValue);
-    }
-
-    for (size_t i = 0; i < kSmallIntegers.size(); i++) {
-        r->add_small_i(kSmallIntegers[i]);
-    }
-
-    for (size_t i = 0; i < kDoubles1.size(); i++) {
-        r->add_d1(kDoubles1[i]);
-    }
-
-    for (size_t i = 0; i < kDoubles2.size(); i++) {
-        r->add_d2(kDoubles2[i]);
-    }
-}
-
-void
-protobuf_serialization_test(size_t iterations)
-{
-    Record r1;
-
-    init_message(&r1);
-
-    std::string serialized;
-
-    r1.SerializeToString(&serialized);
-
-    // check if we can deserialize back
-    Record r2;
-    bool ok = r2.ParseFromString(serialized);
-    if (!ok /*|| r2 != r1*/) {
-        throw std::logic_error("protobuf's case: deserialization failed");
-    }
-
-    std::cout << "protobuf: version = " << GOOGLE_PROTOBUF_VERSION << std::endl;
-    std::cout << "protobuf: size = " << serialized.size() << " bytes" << std::endl;
-
-    auto start = std::chrono::high_resolution_clock::now();
-    for (size_t i = 0; i < iterations; i++) {
-        serialized.clear();
-        r1.SerializeToString(&serialized);
-        r2.ParseFromString(serialized);
-    }
-    auto finish = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
-
-    std::cout << "protobuf: time = " << duration << " milliseconds" << std::endl << std::endl;
-}
 
 int
 main(int argc, char **argv)
@@ -97,7 +41,7 @@ main(int argc, char **argv)
     std::cout << "performing " << iterations << " iterations" << std::endl << std::endl;
 
     try {
-        protobuf_serialization_test(iterations);
+        serialization_test<Record>(iterations);
     } catch (std::exception &exc) {
         std::cerr << "Error: " << exc.what() << std::endl;
         return EXIT_FAILURE;
