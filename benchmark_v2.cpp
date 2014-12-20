@@ -38,7 +38,6 @@ main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    std::cout << "performing " << iterations << " iterations" << std::endl << std::endl;
     std::cout << "version: " << GOOGLE_PROTOBUF_VERSION << std::endl;
 
     try {

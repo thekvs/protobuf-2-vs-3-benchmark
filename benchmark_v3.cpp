@@ -21,7 +21,7 @@ arena_message_construction_test(size_t iterations)
 {
     std::string serialized;
 
-    std::cout << "full message construction/destruction cycle with arena (protobuf 3 only)" << std::endl;
+    std::cout << "full construction/destruction cycle with arena (protobuf 3 only): ";
     auto start = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < iterations; i++) {
         google::protobuf::Arena arena;
@@ -34,7 +34,7 @@ arena_message_construction_test(size_t iterations)
     auto finish = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
 
-    std::cout << "time = " << duration << " milliseconds" << std::endl << std::endl;
+    std::cout << duration << " milliseconds" << std::endl;
 }
 
 int
@@ -60,7 +60,6 @@ main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    std::cout << "performing " << iterations << " iterations" << std::endl << std::endl;
     std::cout << "version: " << GOOGLE_PROTOBUF_VERSION << std::endl;
 
     try {

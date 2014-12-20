@@ -32,21 +32,13 @@ template<typename T>
 void
 message_serialization_test(size_t iterations)
 {
-    T r1;
+    T r1, r2;
     std::string serialized;
 
     init_message(&r1);
     r1.SerializeToString(&serialized);
 
-    // check if we can deserialize back
-    T r2;
-    bool ok = r2.ParseFromString(serialized);
-    if (!ok /*|| r2 != r1*/) {
-        throw std::logic_error("deserialization failed");
-    }
-
-    std::cout << "only message serialization cycle" << std::endl;
-    std::cout << "size = " << serialized.size() << " bytes" << std::endl;
+    std::cout << "only serialization/deserialization cycle: ";
 
     auto start = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < iterations; i++) {
@@ -57,7 +49,7 @@ message_serialization_test(size_t iterations)
     auto finish = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
 
-    std::cout << "time = " << duration << " milliseconds" << std::endl << std::endl;
+    std::cout << duration << " milliseconds" << std::endl;
 }
 
 template<typename T>
@@ -66,7 +58,7 @@ full_message_construction_test(size_t iterations)
 {
     std::string serialized;
 
-    std::cout << "full message construction/destruction cycle" << std::endl;
+    std::cout << "full construction/destruction cycle: ";
     auto start = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < iterations; i++) {
         T* r1 = new T();
@@ -80,7 +72,7 @@ full_message_construction_test(size_t iterations)
     auto finish = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
 
-    std::cout << "time = " << duration << " milliseconds" << std::endl << std::endl;
+    std::cout << duration << " milliseconds" << std::endl;
 }
 
 #endif
