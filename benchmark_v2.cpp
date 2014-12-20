@@ -42,8 +42,8 @@ main(int argc, char **argv)
     std::cout << "version: " << GOOGLE_PROTOBUF_VERSION << std::endl;
 
     try {
-        serialization_test<Record>(iterations);
-        message_construction_test<Record>(iterations);
+        message_serialization_test<Record>(iterations);
+        full_message_construction_test<Record>(iterations);
     } catch (std::exception &exc) {
         std::cerr << "Error: " << exc.what() << std::endl;
         return EXIT_FAILURE;

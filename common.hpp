@@ -30,7 +30,7 @@ init_message(T* r)
 
 template<typename T>
 void
-serialization_test(size_t iterations)
+message_serialization_test(size_t iterations)
 {
     T r1;
     std::string serialized;
@@ -62,7 +62,7 @@ serialization_test(size_t iterations)
 
 template<typename T>
 void
-message_construction_test(size_t iterations)
+full_message_construction_test(size_t iterations)
 {
     std::string serialized;
 
