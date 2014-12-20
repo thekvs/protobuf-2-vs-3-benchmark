@@ -45,7 +45,7 @@ serialization_test(size_t iterations)
         throw std::logic_error("deserialization failed");
     }
 
-    std::cout << "version = " << GOOGLE_PROTOBUF_VERSION << std::endl;
+    std::cout << "only message serialization cycle" << std::endl;
     std::cout << "size = " << serialized.size() << " bytes" << std::endl;
 
     auto start = std::chrono::high_resolution_clock::now();
@@ -53,6 +53,29 @@ serialization_test(size_t iterations)
         serialized.clear();
         r1.SerializeToString(&serialized);
         r2.ParseFromString(serialized);
+    }
+    auto finish = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
+
+    std::cout << "time = " << duration << " milliseconds" << std::endl << std::endl;
+}
+
+template<typename T>
+void
+message_construction_test(size_t iterations)
+{
+    std::string serialized;
+
+    std::cout << "full message construction/destruction cycle" << std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    for (size_t i = 0; i < iterations; i++) {
+        T* r1 = new T();
+        T* r2 = new T();
+        init_message(r1);
+        r1->SerializeToString(&serialized);
+        r2->ParseFromString(serialized);
+        delete r1;
+        delete r2;
     }
     auto finish = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
