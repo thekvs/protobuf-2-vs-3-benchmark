@@ -6,9 +6,6 @@
 #include <chrono>
 #include <sstream>
 
-#include <boost/shared_ptr.hpp>
-#include <boost/lexical_cast.hpp>
-
 #include "generated/message/v2/message.pb.h"
 #include "data.hpp"
 #include "common.hpp"
@@ -28,10 +25,13 @@ main(int argc, char **argv)
         return EXIT_SUCCESS;
     }
 
-    size_t iterations;
+    long iterations;
 
     try {
-        iterations = boost::lexical_cast<size_t>(argv[1]);
+        int rc = str2int(argv[1], iterations);
+        if (rc != 0) {
+            return EXIT_FAILURE;
+        }
     } catch (std::exception &exc) {
         std::cerr << "Error: " << exc.what() << std::endl;
         std::cerr << "First positional argument must be an integer." << std::endl;

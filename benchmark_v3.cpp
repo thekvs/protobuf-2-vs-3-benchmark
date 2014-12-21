@@ -6,9 +6,6 @@
 #include <chrono>
 #include <sstream>
 
-#include <boost/shared_ptr.hpp>
-#include <boost/lexical_cast.hpp>
-
 #include "generated/message/v3/message.pb.h"
 #include "data.hpp"
 #include "common.hpp"
@@ -17,13 +14,13 @@ using namespace protobuf_v3_benchmark;
 
 template<typename T>
 void
-arena_message_construction_test(size_t iterations)
+arena_message_construction_test(long iterations)
 {
     std::string serialized;
 
     std::cout << "full construction/destruction cycle with arena (protobuf 3 only): ";
     auto start = std::chrono::high_resolution_clock::now();
-    for (size_t i = 0; i < iterations; i++) {
+    for (long i = 0; i < iterations; i++) {
         google::protobuf::Arena arena;
         T* r1 = google::protobuf::Arena::CreateMessage<T>(&arena);
         T* r2 = google::protobuf::Arena::CreateMessage<T>(&arena);
@@ -50,10 +47,13 @@ main(int argc, char **argv)
         return EXIT_SUCCESS;
     }
 
-    size_t iterations;
+    long iterations;
 
     try {
-        iterations = boost::lexical_cast<size_t>(argv[1]);
+        int rc = str2int(argv[1], iterations);
+        if (rc != 0) {
+            return EXIT_FAILURE;
+        }
     } catch (std::exception &exc) {
         std::cerr << "Error: " << exc.what() << std::endl;
         std::cerr << "First positional argument must be an integer." << std::endl;

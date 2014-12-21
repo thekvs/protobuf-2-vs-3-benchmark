@@ -2,6 +2,7 @@
 #define __COMMON_HPP_INCLUDED__
 
 #include <string>
+#include <climits>
 
 template<typename T>
 void
@@ -30,7 +31,7 @@ init_message(T* r)
 
 template<typename T>
 void
-message_serialization_test(size_t iterations)
+message_serialization_test(long iterations)
 {
     T r1, r2;
     std::string serialized;
@@ -41,7 +42,7 @@ message_serialization_test(size_t iterations)
     std::cout << "only serialization/deserialization cycle: ";
 
     auto start = std::chrono::high_resolution_clock::now();
-    for (size_t i = 0; i < iterations; i++) {
+    for (long i = 0; i < iterations; i++) {
         serialized.clear();
         r1.SerializeToString(&serialized);
         r2.ParseFromString(serialized);
@@ -54,13 +55,13 @@ message_serialization_test(size_t iterations)
 
 template<typename T>
 void
-full_message_construction_test(size_t iterations)
+full_message_construction_test(long iterations)
 {
     std::string serialized;
 
     std::cout << "full construction/destruction cycle: ";
     auto start = std::chrono::high_resolution_clock::now();
-    for (size_t i = 0; i < iterations; i++) {
+    for (long i = 0; i < iterations; i++) {
         T* r1 = new T();
         T* r2 = new T();
         init_message(r1);
@@ -73,6 +74,38 @@ full_message_construction_test(size_t iterations)
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
 
     std::cout << duration << " milliseconds" << std::endl;
+}
+
+int
+str2int(const char* str, long& value)
+{
+    long n;
+    char* end;
+
+    if (str == NULL || *str == 0x0) {
+        return -1;
+    }
+
+    n = strtol(str, &end, 10);
+
+    if ((n == LONG_MIN || n == LONG_MAX) && errno == ERANGE) {
+        std::cerr << "Error: number " << str << " out of range for a long int type" << std::endl;
+        return -1;
+    }
+
+    if (end == str) {
+        std::cerr << "Error: can't convert string " << str << " to a long int value" << std::endl;
+        return -1;
+    }
+
+    if (*end != '\0') {
+        std::cerr << "Error: trailing garbage at the end of " << str << std::endl;
+        return -1;
+    }
+
+    value = n;
+
+    return 0;
 }
 
 #endif
