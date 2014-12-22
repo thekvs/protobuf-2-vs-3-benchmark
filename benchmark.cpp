@@ -35,7 +35,7 @@ main(int argc, char **argv)
         if (rc != 0) {
             return EXIT_FAILURE;
         }
-    } catch (std::exception &exc) {
+    } catch (std::exception& exc) {
         std::cerr << "Error: " << exc.what() << std::endl;
         std::cerr << "First positional argument must be an integer." << std::endl;
         return EXIT_FAILURE;
