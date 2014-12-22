@@ -87,7 +87,9 @@ set(PROTOBUF_V3_SERIALIZATION_SOURCES ${benchmark_SOURCE_DIR}/generated/message/
 include_directories(${benchmark_SOURCE_DIR}/generated)
 
 add_executable(benchmark-v2
-    ${benchmark_SOURCE_DIR}/benchmark_v2.cpp
+    ${benchmark_SOURCE_DIR}/benchmark.cpp
+    ${benchmark_SOURCE_DIR}/v2.cpp
+    ${benchmark_SOURCE_DIR}/common.cpp
     ${PROTOBUF_V2_SERIALIZATION_SOURCES}
 )
 add_dependencies(benchmark-v2 protobuf_v2)
@@ -96,7 +98,9 @@ set_target_properties(benchmark-v2 PROPERTIES COMPILE_FLAGS "-std=c++11")
 target_include_directories(benchmark-v2 SYSTEM PUBLIC ${protobuf_v2_PREFIX}/include)
 
 add_executable(benchmark-v3
-    ${benchmark_SOURCE_DIR}/benchmark_v3.cpp
+    ${benchmark_SOURCE_DIR}/benchmark.cpp
+    ${benchmark_SOURCE_DIR}/v3.cpp
+    ${benchmark_SOURCE_DIR}/common.cpp
     ${PROTOBUF_V3_SERIALIZATION_SOURCES}
 )
 add_dependencies(benchmark-v3 protobuf_v3)

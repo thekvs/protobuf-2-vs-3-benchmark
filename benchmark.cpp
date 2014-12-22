@@ -1,16 +1,11 @@
-#include <string>
-#include <set>
 #include <iostream>
 #include <stdexcept>
-#include <memory>
-#include <chrono>
-#include <sstream>
 
-#include "generated/message/v2/message.pb.h"
-#include "data.hpp"
+#include <google/protobuf/stubs/common.h>
+
 #include "common.hpp"
 
-using namespace protobuf_v2_benchmark;
+void run_all_benchmarks(long iterations);
 
 int
 main(int argc, char **argv)
@@ -41,8 +36,7 @@ main(int argc, char **argv)
     std::cout << "version: " << GOOGLE_PROTOBUF_VERSION << std::endl;
 
     try {
-        message_serialization_test<Record>(iterations);
-        full_message_construction_test<Record>(iterations);
+        run_all_benchmarks(iterations);
     } catch (std::exception &exc) {
         std::cerr << "Error: " << exc.what() << std::endl;
         return EXIT_FAILURE;
