@@ -8,10 +8,10 @@
 #include "common.hpp"
 
 void
-run_all_benchmarks(long iterations)
+run_all_benchmarks(long iterations, long tests)
 {
     using namespace protobuf_v2_benchmark;
 
-    message_serialization_test<Record>(iterations);
-    full_message_construction_test<Record>(iterations);
+    message_serialization_test<Record>(iterations, tests);
+    full_message_construction_test<Record>(iterations, tests);
 }

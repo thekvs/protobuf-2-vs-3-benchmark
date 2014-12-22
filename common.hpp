@@ -5,8 +5,11 @@
 #include <climits>
 #include <iostream>
 #include <chrono>
+#include <numeric>
 
 #include "data.hpp"
+
+typedef std::vector<long> Timings;
 
 template<typename T>
 void
@@ -35,49 +38,59 @@ init_message(T* r)
 
 template<typename T>
 void
-message_serialization_test(long iterations)
+message_serialization_test(long iterations, long tests)
 {
     T r1, r2;
     std::string serialized;
+    Timings timings;
 
     init_message(&r1);
-    r1.SerializeToString(&serialized);
+    timings.reserve(tests);
 
     std::cout << "only serialization/deserialization cycle: ";
 
-    auto start = std::chrono::high_resolution_clock::now();
-    for (long i = 0; i < iterations; i++) {
-        serialized.clear();
-        r1.SerializeToString(&serialized);
-        r2.ParseFromString(serialized);
+    for (long k = 0; k < tests; k++) {
+        auto start = std::chrono::high_resolution_clock::now();
+        for (long i = 0; i < iterations; i++) {
+            serialized.clear();
+            r1.SerializeToString(&serialized);
+            r2.ParseFromString(serialized);
+        }
+        auto finish = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
+        timings.push_back(duration);
     }
-    auto finish = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
 
-    std::cout << duration << " milliseconds" << std::endl;
+    std::cout << std::accumulate(timings.begin(), timings.end(), 0) / timings.size() << " milliseconds" << std::endl;
 }
 
 template<typename T>
 void
-full_message_construction_test(long iterations)
+full_message_construction_test(long iterations, long tests)
 {
     std::string serialized;
+    Timings timings;
+
+    timings.reserve(tests);
 
     std::cout << "full construction/destruction cycle: ";
-    auto start = std::chrono::high_resolution_clock::now();
-    for (long i = 0; i < iterations; i++) {
-        T* r1 = new T();
-        T* r2 = new T();
-        init_message(r1);
-        r1->SerializeToString(&serialized);
-        r2->ParseFromString(serialized);
-        delete r1;
-        delete r2;
+    for (long k = 0; k < tests; k++) {
+        auto start = std::chrono::high_resolution_clock::now();
+        for (long i = 0; i < iterations; i++) {
+            T* r1 = new T();
+            T* r2 = new T();
+            init_message(r1);
+            r1->SerializeToString(&serialized);
+            r2->ParseFromString(serialized);
+            delete r1;
+            delete r2;
+        }
+        auto finish = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
+        timings.push_back(duration);
     }
-    auto finish = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count();
 
-    std::cout << duration << " milliseconds" << std::endl;
+    std::cout << std::accumulate(timings.begin(), timings.end(), 0) / timings.size() << " milliseconds" << std::endl;
 }
 
 int str2int(const char* str, long& value);
