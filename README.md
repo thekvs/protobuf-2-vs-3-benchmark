@@ -38,7 +38,7 @@ full construction/destruction cycle: 2588 milliseconds
 |          2         |   1304      |
 |          3         |   1321      |
 
-#### full message construction/destruction
+##### full message construction/destruction
 
 | protobuf's version | result (ms) |
 | ------------------ | ----------- |
