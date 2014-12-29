@@ -12,9 +12,29 @@ $ cmake /path/to/protobuf-v2-vs-v3 -DCMAKE_BUILD_TYPE=Release
 $ make
 ```
 
+#### Libraries used
+
 #### Results
 
 Here is results we've got when running tests on typical desktop Core i7 computer:
+
+##### Message serialization/deserialization only
+
+| protobuf's version | result (ms) |
+| ------------------ | ----------- |
+|          2         |   1304      |
+|          3         |   1321      |
+
+##### Full message construction/destruction
+
+| protobuf's version | result (ms) |
+| ------------------ | ----------- |
+|          2         |   2588      |
+|          3         |   3059      |
+|  3 (with arena)    |   2618      |
+
+
+##### Raw benchmarks' output
 
 ```
 $ ./benchmark-v3 50000 50
@@ -30,18 +50,3 @@ version: 2006001
 only serialization/deserialization cycle: 1304 milliseconds
 full construction/destruction cycle: 2588 milliseconds
 ```
-
-##### message serialization/deserialization only
-
-| protobuf's version | result (ms) |
-| ------------------ | ----------- |
-|          2         |   1304      |
-|          3         |   1321      |
-
-##### full message construction/destruction
-
-| protobuf's version | result (ms) |
-| ------------------ | ----------- |
-|          2         |   2588      |
-|          3         |   3059      |
-|  3 (with arena)    |   2618      |
