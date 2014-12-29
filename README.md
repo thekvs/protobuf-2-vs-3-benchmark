@@ -40,8 +40,8 @@ full construction/destruction cycle: 2588 milliseconds
 #### Libraries used
 
 For tests following versions of the protobuf library were used:
- * [Protocol Buffers v3.0.0-alpha-1](https://github.com/google/protobuf/releases/tag/v3.0.0-alpha-1)
- * [Protocol Buffers v2.6.1](https://github.com/google/protobuf/releases/tag/v2.6.1)
+* [Protocol Buffers v3.0.0-alpha-1](https://github.com/google/protobuf/releases/tag/v3.0.0-alpha-1)
+* [Protocol Buffers v2.6.1](https://github.com/google/protobuf/releases/tag/v2.6.1)
 
 #### Building
 This is a tipical CMake project, which does not have any external dependences, i.e. all needed
