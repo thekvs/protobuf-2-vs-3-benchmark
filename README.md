@@ -22,7 +22,7 @@ Here is the results I've got when running tests on a typical desktop Core i7 com
 |          3         |   3059      |
 |  3 (with arena)    |   2618      |
 
-![Full message construction/destruction](images/2.png)
+![full message construction/destruction](images/2.png)
 
 ##### Raw benchmarks' output
 
