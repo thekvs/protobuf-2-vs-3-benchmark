@@ -1,4 +1,4 @@
-### Benchmark comparing performance of Google's protobuf library version 2 vs. version 3.
+### Benchmark comparing performance of Google's protobuf library version 2 vs. version 3
 
 
 #### Results
@@ -57,8 +57,9 @@ protobuf libraries will be downloaded and build automatically. To build this pro
 compiler that supports C++11 features, compilation was tested on GCC 4.8.2 and clang 3.5.
 
 ```
+$ git clone https://github.com/thekvs/protobuf-2-vs-3-benchmark.git
 $ mkdir /path/to/build-root/
 $ cd /path/to/build-root/
-$ cmake /path/to/protobuf-v2-vs-v3 -DCMAKE_BUILD_TYPE=Release
+$ cmake /path/to/protobuf-2-vs-3-benchmark -DCMAKE_BUILD_TYPE=Release
 $ make
 ```
